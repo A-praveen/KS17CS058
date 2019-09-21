@@ -1,0 +1,96 @@
+https://github.com/A-praveen/KS17CS058.git
+
+PROGRAM B6:
+This program is done by using django(python):-
+
+//creation of page1.html:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>page1</title>
+</head>
+<body>
+<h1>page 1</h1>
+<form method="post" action="{%url 'page2'%}">
+    {% csrf_token %}
+    <button type="submit">go to page2</button>
+</form>
+</body>
+</html>
+
+//creation of page2.html:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>page2</title>
+</head>
+<body>
+<h1>page 2</h1>
+<form method="post" action="{%url 'page3'%}">
+    {% csrf_token %}
+    <button type="submit">go to page3</button>
+</form>
+</body>
+</html>
+
+//creation of page3.html:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>page3</title>
+</head>
+<body>
+<h1>page 3</h1>
+<form method="post" action="{%url 'page1'%}">
+    {% csrf_token %}
+    <button type="submit">go to page1</button>
+</form>
+</body>
+</html>
+
+//this takes url and views the page in html:
+
+from django.shortcuts import render
+
+# Create your views here.
+def page1(request):
+    return render(request,'pages/page1.html')
+def page2(request):
+    return render(request,'pages/page2.html')
+def page3(request):
+    return render(request,'pages/page3.html')
+ 
+url:http://assignmentwebpages.herokuapp.com/
+
+
+//output:
+There are 3 web pages page1.html,page2.html,page3.html.
+page1.html will redirect or go to page2.html,page2.html will redirect to page3.html,
+page3.html will redirect back to page1.html
+
+//using wget command:
+wget assignmentwebpages.herokuapp.com
+--2019-09-21 16:28:32-- 
+http://assignmentwebpages.herokuapp.com/
+Resolving assignmentwebpages.herokuapp.com 
+(assignmentwebpages.herokuapp.com)... 52.200.81.157, 52.6.103.192, 34.238.112.56, 
+...
+Connecting to assignmentwebpages.herokuapp.com (assignmentwebpages.herokuapp.com)
+|52.200.81.157|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 357 [text/html]
+
+Saving to: ‘index.html.8’
+
+index.html.8    
+100%[===================>]     357  --.-KB/s    in 0s      
+
+2019-09-21 16:28:33 (24.0 MB/s) 
+- ‘index.html.8’ saved [357/357]
+
+Analysis:
+In html the browser gets executed continuosly when we redirect or click the next page.
+But in wget we only get the first page of the html,it cant redirect to next page.
